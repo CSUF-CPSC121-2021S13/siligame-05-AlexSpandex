@@ -11,8 +11,9 @@ void Game::LaunchProjectiles(){
     std::unique_ptr<OpponentProjectile> badbeam = opponentlist[i]->LaunchProjectile();
     std::unique_ptr<OpponentProjectile> badbeamshoot_ = std::move(badbeam);
     if (badbeam != nullptr) {
-      badbeamshoot_.push_back(std::move(badbeam));
-    } else nullptr;
+      badbeamshoot_.push_back(badbeamshoot_);
+    } else
+     nullptr;
   }
 }
 
@@ -47,10 +48,10 @@ void Game::Init() {
 }
 
 void Game::UpdateScreen() {
-
-
   backgroundscreen.DrawRectangle(0, 0, 800, 600, 255, 255, 255);
   if(lost_ == false){
+    std::string show_score = "Score: "
+  background.DrawText(10, 10, show_score, 16 ,graphics::Color(255,255,255))
   
   for (int i = 0; i < opponentlist.size(); i++) {
     if (opponentlist[i]->GetIsActive()) {
@@ -73,9 +74,11 @@ void Game::UpdateScreen() {
     player.Draw(backgroundscreen);
   }
 
-}
+} else if(lost_ == true){
 backgroundscreen.DrawRectangle(0, 0, 800, 600, 255, 255, 255)
-
+std::string gameOver = "Game Over"
+background.DrawText(400, 300, gameOver, 30,graphics::Color(255,255,255))
+}
 }
 
 void Game::Start() { backgroundscreen.ShowUntilClosed(); }
@@ -147,5 +150,10 @@ void Game::OnMouseEvent(const graphics::MouseEvent& event) {
     player.SetX(event.GetX() - (player.GetWidth() / 2));
     player.SetY(event.GetY() - (player.GetHeight() / 2));
   }
-  else if
+  if (event.GetMouseAction() == graphics::MouseAction::kPressed || event.GetMouseAction() == graphics::MouseAction::kMoved){
+std::unique_ptr<PlayerProjectile> pp = std::make_unique<PlayerProjectile>(player.GetX(), player.GetY());
+std::unique_ptr<PlayerProjectile> biggerpp = std::move(pp)
+  playerbeams_.push_back(biggerpp);
+  }
 }
+

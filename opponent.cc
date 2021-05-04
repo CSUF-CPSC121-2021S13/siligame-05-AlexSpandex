@@ -1,4 +1,5 @@
 #include "opponent.h"
+#include <memory>
 
 void Opponent::Move(const graphics::Image& move) {
   if (!GameElement::IsOutOfBounds(move)) {
