@@ -3,16 +3,7 @@
 #include "cpputils/graphics/image.h"
 #include "game_element.h"
 #include <memory>
-
-class Opponent : public GameElement {
- public:
-  Opponent(int x, int y) : GameElement(x, y, 50, 50) {}
-  Opponent() : GameElement() {}
-  void Draw(graphics::Image &draw) override;
-  void Move(const graphics::Image &move) override;
-  
- std::unique_ptr<OpponentProjectile> LaunchProjectile();
-};
+#include <vector>
 
 class OpponentProjectile : public GameElement {
  public:
@@ -22,6 +13,16 @@ class OpponentProjectile : public GameElement {
   void Move(const graphics::Image &move) override;
   
   private:
-  std::vector<OpponentProjectile*> op_vector;
+  std::vector<std::unique_ptr<OpponentProjectile>> op_vector;
+};
+
+class Opponent : public GameElement {
+ public:
+  Opponent(int x, int y) : GameElement(x, y, 50, 50) {}
+  Opponent() : GameElement() {}
+  void Draw(graphics::Image &draw) override;
+  void Move(const graphics::Image &move) override;
+  
+ std::unique_ptr<OpponentProjectile> LaunchProjectile();
 };
 #endif

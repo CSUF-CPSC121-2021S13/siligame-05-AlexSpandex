@@ -2,6 +2,7 @@
 #define GAME_H
 #include <iostream>
 #include <memory>
+#include <vector>
 #include "cpputils/graphics/image.h"
 #include "cpputils/graphics/image_event.h"
 #include "game_element.h"
