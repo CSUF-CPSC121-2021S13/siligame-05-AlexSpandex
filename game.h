@@ -17,7 +17,7 @@ class Game : public graphics::AnimationEventListener,
   std::vector<std::unique_ptr<OpponentProjectile>> opponentbeams_;
   std::vector<std::unique_ptr<PlayerProjectile>> playerbeams_;
   Player player;
- int player_score_;
+ int player_score_ = 0;
  bool lost_;
 
  public:

@@ -3,14 +3,14 @@
 // member function
 void Game::CreateOpponents() {
   std::unique_ptr<Opponent> ghost;
-  opponentlist.push_back(ghost);
+  opponentlist.push_back(std::move(ghost));
 }
 
 void Game::LaunchProjectiles(){
   for (int i = 0; i < opponentlist.size(); i++) {
     std::unique_ptr<OpponentProjectile> badbeam = opponentlist[i]->LaunchProjectile();
     if (badbeam != nullptr) {
-      opponentlist.push_back(std::move(badbeam));
+      opponentbeams_.push_back(std::move(badbeam));
     } else continue;
   }
 }
@@ -46,8 +46,8 @@ void Game::Init() {
 void Game::UpdateScreen() {
   backgroundscreen.DrawRectangle(0, 0, 800, 600, 255, 255, 255);
   if(lost_ == false){
-    std::string show_score = "Score: ";
-  backgroundscreen.DrawText(10, 10, show_score, 16 ,graphics::Color(255,255,255));
+    std::string show_score = "Score: " + std::to_string(player_score_);
+  backgroundscreen.DrawText(10, 10, show_score, 16 ,graphics::Color(0,0,0));
   for (int i = 0; i < opponentlist.size(); i++) {
     if (opponentlist[i]->GetIsActive()) {
       opponentlist[i]->Draw(backgroundscreen);
@@ -69,10 +69,9 @@ void Game::UpdateScreen() {
     player.Draw(backgroundscreen);
   }
 
-} else if(lost_ == true){
-backgroundscreen.DrawRectangle(0, 0, 800, 600, 255, 255, 255);
+} else{
 std::string gameOver = "Game Over";
-backgroundscreen.DrawText(400, 300, gameOver, 30,graphics::Color(255,255,255));
+backgroundscreen.DrawText(400, 300, gameOver, 30,graphics::Color(0,0,0));
 }
 }
 
@@ -147,8 +146,7 @@ void Game::OnMouseEvent(const graphics::MouseEvent& event) {
   }
   if (event.GetMouseAction() == graphics::MouseAction::kPressed || event.GetMouseAction() == graphics::MouseAction::kMoved){
 std::unique_ptr<PlayerProjectile> pp = std::make_unique<PlayerProjectile>(player.GetX(), player.GetY());
-std::unique_ptr<PlayerProjectile> biggerpp = std::move(pp);
-  playerbeams_.push_back(biggerpp);
+  playerbeams_.push_back(std::move(pp));
   }
 }
 
