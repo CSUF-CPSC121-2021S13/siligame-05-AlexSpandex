@@ -1,9 +1,9 @@
 #ifndef OPPONENT_H
 #define OPPONENT_H
-#include "cpputils/graphics/image.h"
-#include "game_element.h"
 #include <memory>
 #include <vector>
+#include "cpputils/graphics/image.h"
+#include "game_element.h"
 
 class OpponentProjectile : public GameElement {
  public:
@@ -11,8 +11,8 @@ class OpponentProjectile : public GameElement {
   OpponentProjectile() : GameElement() {}
   void Draw(graphics::Image &draw) override;
   void Move(const graphics::Image &move) override;
-  
-  private:
+
+ private:
   std::vector<std::unique_ptr<OpponentProjectile>> op_vector;
 };
 
@@ -22,9 +22,10 @@ class Opponent : public GameElement {
   Opponent() : GameElement() {}
   void Draw(graphics::Image &draw) override;
   void Move(const graphics::Image &move) override;
-  
- std::unique_ptr<OpponentProjectile> LaunchProjectile();
+
+  std::unique_ptr<OpponentProjectile> LaunchProjectile();
+
  private:
- int count = 0;
+  int count = 0;
 };
 #endif

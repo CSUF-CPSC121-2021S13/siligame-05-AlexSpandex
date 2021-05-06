@@ -20,17 +20,17 @@ void OpponentProjectile::Move(const graphics::Image& move) {
 }
 
 std::unique_ptr<OpponentProjectile> Opponent::LaunchProjectile() {
-  if (count == 50){
-     std::unique_ptr<OpponentProjectile> badbeam = std::make_unique<OpponentProjectile>((x_+ width_) * 0.5, y_ + height_);
-     count = 0;
-     return badbeam;
-  }
-  else {
+  if (count == 50) {
+    std::unique_ptr<OpponentProjectile> badbeam =
+        std::make_unique<OpponentProjectile>(Opponent::GetX(),
+                                             Opponent::GetY());
+    count = 0;
+    return badbeam;
+  } else {
     count++;
     return nullptr;
   }
-  }
-
+}
 void Opponent::Draw(graphics::Image& opponent) {
   opponent.DrawRectangle(x_ + 19, y_ + 1, 11, 2, 48, 44, 44);   ////////////
   opponent.DrawRectangle(x_ + 16, y_ + 3, 3, 2, 48, 44, 44);    /// Dark
