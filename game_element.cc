@@ -21,7 +21,7 @@ bool GameElement::IntersectsWith(const GameElement* intersects) {
 
 bool GameElement::IsOutOfBounds(const graphics::Image& bounds) {
   if (!(x_ + width_ > bounds.GetWidth() || x_ < 0 ||
-      y_ + height_ > bounds.GetHeight() || y_ < 0)) {
+        y_ + height_ > bounds.GetHeight() || y_ < 0)) {
     return false;
   } else {
     return true;

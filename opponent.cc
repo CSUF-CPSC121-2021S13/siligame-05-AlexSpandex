@@ -144,7 +144,6 @@ void Opponent::Draw(graphics::Image& opponent) {
 }
 
 void OpponentProjectile::Draw(graphics::Image& opponentprojectile) {
-  opponentprojectile.DrawRectangle(x_ + 0, y_ + 0, 50, 50, 255, 255, 255);
   opponentprojectile.DrawRectangle(x_ + 0, y_ + 0, 4, 4, 29, 27, 27);
   opponentprojectile.DrawRectangle(x_ + 0, y_ + 0, 1, 1, 255, 255, 255);
   opponentprojectile.DrawRectangle(x_ + 2, y_ + 0, 1, 1, 255, 255, 255);
