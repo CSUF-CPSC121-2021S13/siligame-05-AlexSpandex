@@ -115,9 +115,7 @@ void Game::FilterIntersections() {
         playerbeams_[j]->SetIsActive(false);
         opponentlist[x]->SetIsActive(false);
         if (player.GetIsActive()) {
-          playerbeams_[j]->SetIsActive(false);
-          opponentlist[x]->SetIsActive(false);
-          player_score_++;
+               player_score_++;
         }
       }
     }
